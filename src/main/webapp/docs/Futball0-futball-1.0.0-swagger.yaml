@@ -1,0 +1,124 @@
+swagger: '2.0'
+info:
+  description: This is a simple API
+  version: 1.0.0
+  title: Futball
+  # put the contact info for your development or API team
+  contact: 
+    email: rodriguez.terron.gonzalo@gmail.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+host : futball-270917.appspot.com
+basePath: /api
+
+# tags are used for organizing operations
+tags: 
+- name: equipos
+  description: Operaciones relacionadas con los equipos
+
+paths: 
+  /equipos:
+    get:
+      summary: Muestra todos los equipos
+      operationId: getEquipos
+      description: Muestra todos los equipos
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+              $ref: '#/definitions/equipos'
+        400:
+          description: Bad request
+    put:
+      summary: Actualiza los equipos
+      operationId: putEquipos
+      description: Actualiza los equipos(subida de división)
+      produces:
+      - application/json
+      responses:
+        204:
+          description: No Content
+          schema:
+              $ref: '#/definitions/equipos'
+        404:
+          description: Not Found
+    delete:
+      summary: Borrar un equipo de una división
+      operationId: deleteEquipos
+      description: Borrar un equipo de una división
+      produces:
+      - application/json
+      responses:
+        204:
+          description: No Content
+          schema:
+              $ref: '#/definitions/equipos'
+        404:
+          description: Not Found
+  /jugadores:
+      get:
+        summary: Muestra todos los jugadores
+        operationId: getJugadores
+        description: Muestra todos los jugadores de un equipo
+        produces:
+        - application/json
+        responses:
+          200:
+            description: OK
+            schema:
+                $ref: '#/definitions/jugadores'
+          400:
+            description: Bad request
+      post:
+        summary: Añade un jugador 
+        operationId: postJugadores
+        description: Añade un jugador a un equipo
+        produces:
+        - application/json
+        responses:
+          204:
+            description: No Content
+            schema:
+                $ref: '#/definitions/jugadores'
+          404:
+            description: Not Found
+      delete:
+        summary: Elimina un jugador 
+        operationId: deleteJugadores
+        description: Elimina un jugador de un equipo
+        produces:
+        - application/json
+        responses:
+          204:
+            description: No Content
+            schema:
+                $ref: '#/definitions/jugadores'
+          404:
+            description: Not Found
+
+definitions:
+  equipos:
+    type: object
+    required:
+    - equipos
+    properties:
+      equipos:
+        type: string
+        example: 'Sevilla FC, Barcelona, Real Madrid'
+  jugadores:
+    type: object
+    required:
+    - jugadores
+    - equipos
+    properties:
+      jugadores:
+        type: string
+        example: 'Lucas Ocampos, Lionel Messi, Sergio Ramos'
+      equipos:
+        type: string
+        example: 'Sevilla FC, Barcelona, Real Madrid'
